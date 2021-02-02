@@ -1,4 +1,3 @@
-from os.path import join, dirname, realpath
 from setuptools import setup
 import sys
 
@@ -7,8 +6,8 @@ assert sys.version_info.major == 3 and sys.version_info.minor >= 6, \
     + "Please install it before proceeding."
 
 setup(
-    name='ACL_bench',
-    py_modules=['ACL_bench'],
+    name='TeachMyAgent',
+    py_modules=['TeachMyAgent'],
     version="0.1",
     install_requires=[
         'cloudpickle==1.2.0',
@@ -36,6 +35,6 @@ setup(
         'tqdm',
         'emcee'
     ],
-    description="Teacher algorithms for curriculum learning of Deep RL in continuously parameterized environments",
-    author="Rémy Portelas",
+    description="TeachMyAgent: A benchmark to study and compare ACL algorithms in continuous procedural environments.",
+    author="Anonymous authors",
 )

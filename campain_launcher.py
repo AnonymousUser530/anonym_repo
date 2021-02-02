@@ -30,41 +30,41 @@ def process_arg_string(expe_args):  # function to extract flagged (with a *) arg
     return details_string, processed_arg_string
 
 
-slurm_confs = {'curta_inria_extra_long': "#SBATCH -p inria\n"
+slurm_confs = {'curta_inria_extra_long': "#SBATCH -p XXX\n"
                                          "#SBATCH -t 119:00:00\n",
-               'curta_inria_long': "#SBATCH -p inria\n"
+               'curta_inria_long': "#SBATCH -p XXX\n"
                                    "#SBATCH -t 72:00:00\n",
-               'curta_inria_medium': "#SBATCH -p inria\n"
+               'curta_inria_medium': "#SBATCH -p XXX\n"
                                      "#SBATCH -t 48:00:00\n",
-               'curta_inria_short': "#SBATCH -p inria\n"
+               'curta_inria_short': "#SBATCH -p XXX\n"
                                     "#SBATCH -t 24:00:00\n",
-               'jeanzay_short': '#SBATCH -A zaj@gpu\n'
+               'jeanzay_short': '#SBATCH -A XXX\n'
                                 '#SBATCH --gres=gpu:1\n'
                                 "#SBATCH -t 19:59:00\n"
                                 "#SBATCH --qos=qos_gpu-t3\n",
-               'jeanzay_medium': '#SBATCH -A zaj@gpu\n'
+               'jeanzay_medium': '#SBATCH -A XXX\n'
                                  '#SBATCH --gres=gpu:1\n'
                                  "#SBATCH -t 48:00:00\n"
                                  "#SBATCH --qos=qos_gpu-t4\n",
-               'jeanzay_long': '#SBATCH -A zaj@gpu\n'
+               'jeanzay_long': '#SBATCH -A XXX\n'
                                '#SBATCH --gres=gpu:1\n'
                                "#SBATCH -t 72:00:00\n"
                                "#SBATCH --qos=qos_gpu-t4\n",
-               'jeanzay_new_short': '#SBATCH -A imi@gpu\n'
+               'jeanzay_new_short': '#SBATCH -A XXX\n'
                                 '#SBATCH --gres=gpu:1\n'
                                 "#SBATCH -t 19:59:00\n"
                                 "#SBATCH --qos=qos_gpu-t3\n",
-               'jeanzay_new_medium': '#SBATCH -A imi@gpu\n' 
+               'jeanzay_new_medium': '#SBATCH -A XXX\n' 
                                  '#SBATCH --gres=gpu:1\n'
                                  "#SBATCH -t 48:00:00\n"
                                  "#SBATCH --qos=qos_gpu-t4\n",
-               'jeanzay_new_long': '#SBATCH -A imi@gpu\n'
+               'jeanzay_new_long': '#SBATCH -A XXX\n'
                                '#SBATCH --gres=gpu:1\n'
                                "#SBATCH -t 72:00:00\n"
                                "#SBATCH --qos=qos_gpu-t4\n",
                'plafrim_cpu_medium': "#SBATCH -t 48:00:00\n",
                'plafrim_cpu_long': "#SBATCH -t 72:00:00\n",
-               'plafrim_gpu_medium': '#SBATCH -p long_sirocco\n'
+               'plafrim_gpu_medium': '#SBATCH -p XXX\n'
                                      "#SBATCH -t 48:00:00\n"
                                      '#SBATCH --gres=gpu:1\n'
                }
@@ -75,7 +75,7 @@ date = date.today().strftime("%d-%m")
 Path(cur_path + "/campain_logs/jobouts/").mkdir(parents=True, exist_ok=True)
 Path(cur_path + "/campain_logs/scripts/").mkdir(parents=True, exist_ok=True)
 # Load txt file containing experiments to run (give it as argument to this script)
-filename = 'tests_to_run.txt'
+filename = 'to_run.txt'
 if len(sys.argv) >= 2:
     filename = sys.argv[1]
 launch = True
@@ -110,19 +110,19 @@ for expe_args in expe_list:
     slurm_conf_name, nb_seeds, exp_name = [arg.split(' ')[1] for arg in exp_config]
     if 'curta' in slurm_conf_name:
         gpu = ''
-        PYTHON_INTERP = '/gpfs/home/cromac/miniconda3/envs/teachDRLdev/bin/python'
+        PYTHON_INTERP = '/gpfs/home/XXX/bin/python'
         n_cpus = 1
     elif 'plafrim' in slurm_conf_name:
         gpu = ''
-        PYTHON_INTERP = '/home/cromac/miniconda3/envs/teachDRL/bin/python'
+        PYTHON_INTERP = '/home/XXX/bin/python'
         n_cpus = 1
     elif 'jeanzay_new' in slurm_conf_name:
-        PYTHON_INTERP = '/gpfsdswork/projects/rech/imi/ucy39hi/miniconda3/envs/teachDRL/bin/python'
+        PYTHON_INTERP = '/gpfsdswork/projects/rech/XXX/bin/python'
         gpu = ''  # '--gpu_id 0'
         n_cpus = 2
     elif 'jeanzay' in slurm_conf_name:
-        PYTHON_INTERP = '/gpfswork/rech/zaj/utz47be/miniconda3/envs/teachDRLdev/bin/python'
-        gpu = ''  # '--gpu_id 0'
+        PYTHON_INTERP = '/gpfswork/rech/XXX/bin/python'
+        gpu = ''
         n_cpus = 2
     else:
         raise Exception("Unrecognized conf name.")
@@ -152,12 +152,12 @@ for expe_args in expe_list:
         f.write('#SBATCH -o campain_logs/jobouts/{}.sh.out\n'
                 '#SBATCH -e campain_logs/jobouts/{}.sh.err\n'.format(exp_name, exp_name))
         f.write("export EXP_INTERP='{}' ;\n".format(PYTHON_INTERP))
-        f.write('mkdir ACL_bench/data/{}\n'.format(exp_name))
+        f.write('mkdir TeachMyAgent/data/{}\n'.format(exp_name))
         f.write('# Copy itself in experimental dir\n')
-        f.write('cp $SLURM_JOB_NAME ACL_bench/data/{}/{}.sh\n'.format(exp_name, exp_name))
+        f.write('cp $SLURM_JOB_NAME TeachMyAgent/data/{}/{}.sh\n'.format(exp_name, exp_name))
         f.write('# Add info about git status to exp dir\n')
         f.write('current_commit="$(git log -n 1)"\n')
-        f.write('echo "${{current_commit}}" > ACL_bench/data/{}/git_status.txt\n'.format(exp_name))
+        f.write('echo "${{current_commit}}" > TeachMyAgent/data/{}/git_status.txt\n'.format(exp_name))
         f.write('# Launch !\n')
         f.write(
             'cpu_list=$(taskset -pc $$ | sed -E "s/(.*): (.*)/\\2/g" | tr "," "\\n" | sed -E "s/^[0-9]*$/&-&/g" | sed -E "s/-/ /g" | xargs -l seq | tr "\\n" " ")\n')

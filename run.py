@@ -1,11 +1,9 @@
 import argparse
 import os
 
-from ACL_bench.run_utils.environment_args_handler import EnvironmentArgsHandler
-from ACL_bench.run_utils.replay_buffer_args_handler import ReplayBufferArgsHandler
-from ACL_bench.run_utils.teacher_args_handler import TeacherArgsHandler
-
-from ACL_bench.run_utils.student_args_handler import StudentArgsHandler
+from TeachMyAgent.run_utils.environment_args_handler import EnvironmentArgsHandler
+from TeachMyAgent.run_utils.teacher_args_handler import TeacherArgsHandler
+from TeachMyAgent.run_utils.student_args_handler import StudentArgsHandler
 
 if __name__ == '__main__':
     # Argument definition
@@ -18,7 +16,6 @@ if __name__ == '__main__':
     StudentArgsHandler.set_parser_arguments(parser)
     EnvironmentArgsHandler.set_parser_arguments(parser)
     TeacherArgsHandler.set_parser_arguments(parser)
-    ReplayBufferArgsHandler.set_parser_arguments(parser)
 
     # Argument parsing
     args = parser.parse_args()
@@ -31,14 +28,6 @@ if __name__ == '__main__':
 
     print('Setting up the teacher algorithm...')
     Teacher = TeacherArgsHandler.get_object_from_arguments(args, param_env_bounds, initial_dist, target_dist)
-
-    # print('Setting up the replay buffer...')
-    # env = env_f()
-    # obs_dim = env.observation_space.shape[0]
-    # act_dim = env.action_space.shape[0]
-    # env.close()
-    #
-    # replay_buffer = ReplayBufferArgsHandler.get_object_from_arguments(args, Teacher, obs_dim, act_dim)
 
     print('Setting up the student algorithm...')
     # Launch Student training

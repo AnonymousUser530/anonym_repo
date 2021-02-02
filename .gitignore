@@ -4,14 +4,14 @@
 SpinupTests/
 DebugMorphology/
 
-ACL_bench/data/*
-ACL_bench/students/data/*
-!ACL_bench/data/elders_knowledge/
+TeachMyAgent/data/*
+TeachMyAgent/students/data/*
+!TeachMyAgent/data/elders_knowledge/
 
 
-ACL_bench/graphics/*
-!ACL_bench/graphics/readme_graphics/
-!ACL_bench/data/BENCHMARK/V1/
+TeachMyAgent/graphics/*
+!TeachMyAgent/graphics/readme_graphics/
+!TeachMyAgent/data/BENCHMARK/V1/
 
 campain_logs/
 slurm*

@@ -1,12 +1,12 @@
 import argparse
-from ACL_bench.run_utils.teacher_args_handler import TeacherArgsHandler
-from ACL_bench.toy_env.toy_env import ToyEnvV2
+from TeachMyAgent.run_utils.teacher_args_handler import TeacherArgsHandler
+from TeachMyAgent.toy_env.toy_env import ToyEnvV2
 import numpy as np
 import json
 import time
 import copy
-from ACL_bench.students.spinup.utils.run_utils import setup_logger_kwargs
-from ACL_bench.students.spinup.utils.logx import EpochLogger
+from TeachMyAgent.students.spinup.utils.run_utils import setup_logger_kwargs
+from TeachMyAgent.students.spinup.utils.logx import EpochLogger
 import pickle
 
 if __name__ == '__main__':
@@ -42,11 +42,6 @@ if __name__ == '__main__':
         "mean": np.array([0, 0]),
         "variance": np.diag([0.01, 0.01])
     }
-
-    # target_dist = {
-    #     "mean": np.array([1, 1]),
-    #     "variance": np.diag([0.1, 0.1])
-    # }
     target_dist = {
         "mean": np.array([0.5, 0.5]),
         "variance": np.diag([0.25, 0.25])
@@ -155,7 +150,6 @@ if __name__ == '__main__':
 
         is_teacher_updated = Teacher.task_generator.episodic_update(np.array(task_params), reward, 0 < reward < 1)
         if is_teacher_updated:
-            #print('teacher updated at {}'.format(i))
             comp_grid_at_teacher_updates.append(env.get_cube_competence().astype(np.int8))
 
         train_rewards.append(reward)
