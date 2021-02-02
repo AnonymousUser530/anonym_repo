@@ -1,17 +1,13 @@
 *.xml
 *.iml
 
-SpinupTests/
-DebugMorphology/
-
 TeachMyAgent/data/*
 TeachMyAgent/students/data/*
-!TeachMyAgent/data/elders_knowledge/
-
 
 TeachMyAgent/graphics/*
 !TeachMyAgent/graphics/readme_graphics/
 !TeachMyAgent/data/BENCHMARK/V1/
+!TeachMyAgent/data/HP_TUNING_TEACHERS/V1/
 
 campain_logs/
 slurm*
