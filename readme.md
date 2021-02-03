@@ -9,7 +9,7 @@ Our repository provides:
 - **Two benchmark experiments** using elements above: Skill-specific comparison and global performance assessment
 - **A notebook for systematic analysis** of results using statistical tests along with visualisation tools (plots, videos...)
  
- ![global_schema](./TeachMyAgent/graphics/readme_graphics/global_schema.svg)
+ ![global_schema](./TeachMyAgent/graphics/readme_graphics/global_schema.png)
  
  ## Table of Contents  
 **[Installation](#installation)**<br>
@@ -29,6 +29,8 @@ conda create --name teachMyAgent python=3.6
 conda activate teachMyAgent
 pip install -e .
 ```
+
+**Note: For Windows users, add `-f https://download.pytorch.org/whl/torch_stable.html` to the `pip install -e .` command.**
 
 ## Launching an experiment
 You can launch an experiment using `run.py`:
