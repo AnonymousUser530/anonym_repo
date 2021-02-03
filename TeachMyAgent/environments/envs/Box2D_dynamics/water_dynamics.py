@@ -174,7 +174,7 @@ class WaterDynamics(object):
                             push_dot = Box2D.b2Dot(normal, force_applied_at_center)
                             if push_dot > 0:
                                 vel = torque + angular_inertia
-                                push_mag =  push_dot * self.push_mod * edge_length * density * vel * vel # Wrong approximation /!\
+                                push_mag = push_dot * self.push_mod * edge_length * density * vel * vel # Wrong approximation /!\
                                 # push_mag = min(push_mag, self.max_push)
                                 push_force = np.clip(push_mag * -force_applied_at_center, -self.max_push, self.max_push)
                                 body_to_check.ApplyForce(force=push_force,

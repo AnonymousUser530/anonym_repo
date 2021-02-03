@@ -9,7 +9,6 @@ from TeachMyAgent.teachers.algos.self_paced_teacher import SelfPacedTeacher
 from TeachMyAgent.teachers.algos.goal_gan import GoalGAN
 from TeachMyAgent.teachers.algos.setter_solver import SetterSolver
 from TeachMyAgent.teachers.algos.random_teacher import RandomTeacher
-from TeachMyAgent.teachers.algos.oracle_teacher import GaussianOracleTeacher
 from TeachMyAgent.teachers.utils.dimensions_shuffler import DimensionsShuffler
 from collections import OrderedDict
 
@@ -90,9 +89,7 @@ class TeacherController(object):
             self.dimensions_shuffler = None
 
         # setup tasks generator
-        if teacher == 'Oracle':
-            self.task_generator = GaussianOracleTeacher(mins, maxs, seed=seed, **teacher_params)
-        elif teacher == 'Random':
+        if teacher == 'Random':
             self.task_generator = RandomTeacher(mins, maxs, seed=seed, **teacher_params)
         elif teacher == 'RIAC':
             self.task_generator = RIAC(mins, maxs, seed=seed, **teacher_params)

@@ -14,14 +14,14 @@ class EnvironmentArgsHandler(AbstractArgsHandler):
         if args.motors_torque is not None:
             body_args["motors_torque"] = args.motors_torque
 
-        if args.walker_type == "millepede" and args.nb_of_bodies is not None:
+        if args.embodiment == "millepede" and args.nb_of_bodies is not None:
             body_args["nb_of_bodies"] = args.nb_of_bodies
-        elif args.walker_type == "spider" and args.nb_pairs_of_legs is not None:
+        elif args.embodiment == "spider" and args.nb_pairs_of_legs is not None:
             body_args["nb_pairs_of_legs"] = args.nb_pairs_of_legs
-        elif args.walker_type == "wheel" and args.body_scale is not None:
+        elif args.embodiment == "wheel" and args.body_scale is not None:
             body_args["body_scale"] = args.body_scale
 
-        body_type = BodiesEnum.get_body_type(args.walker_type)
+        body_type = BodiesEnum.get_body_type(args.embodiment)
         if body_type == BodyTypesEnum.SWIMMER and args.outside_water is not None:
             body_args["nb_steps_outside_water"] = args.outside_water
         elif (body_type == BodyTypesEnum.WALKER or body_type == BodyTypesEnum.CLIMBER) and args.under_water is not None:
@@ -34,7 +34,7 @@ class EnvironmentArgsHandler(AbstractArgsHandler):
         parser.add_argument('--env', type=str, default="parametric-continuous-stump-tracks-v0")
 
         # Choose student (walker morphology)
-        parser.add_argument('--walker_type', type=str, default="old_classic_bipedal")  # choose walker type
+        parser.add_argument('--embodiment', type=str, default="old_classic_bipedal")  # choose morphology
         parser.add_argument('--motors_torque', type=float, default=None)
         parser.add_argument('--nb_of_bodies', type=float, default=None) # Millipede
         parser.add_argument('--nb_pairs_of_legs', type=float, default=None) # Spider
@@ -124,7 +124,7 @@ class EnvironmentArgsHandler(AbstractArgsHandler):
             initial_dist["mean"] = np.array(initial_dist["mean"])
             initial_dist["variance"] = np.diag(initial_dist["variance"])
 
-            env_f = lambda: gym.make(args.env, walker_type=args.walker_type, **cls.get_body_wargs(args))
+            env_f = lambda: gym.make(args.env, walker_type=args.embodiment, **cls.get_body_wargs(args))
 
         elif args.env == "parametric-continuous-parkour-v0":
             args.env_reward_lb = -150
@@ -152,7 +152,7 @@ class EnvironmentArgsHandler(AbstractArgsHandler):
             else:
                 movable_creepers = False
 
-            body_type = BodiesEnum.get_body_type(args.walker_type)
+            body_type = BodiesEnum.get_body_type(args.embodiment)
             if body_type == BodyTypesEnum.WALKER:
                 if args.lidars_type is None:
                     args.lidars_type = "down"
@@ -164,7 +164,7 @@ class EnvironmentArgsHandler(AbstractArgsHandler):
                     args.lidars_type = "full"
 
             env_f = lambda: gym.make(args.env,
-                                     agent_body_type=args.walker_type,
+                                     agent_body_type=args.embodiment,
                                      CPPN_weights_path=args.CPPN_weights_path,
                                      input_CPPN_dim=args.input_CPPN_dim,
                                      ceiling_offset=args.ceiling_offset,

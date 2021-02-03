@@ -1,6 +1,5 @@
 import gym
 import TeachMyAgent.environments
-import TeachMyAgent.gym_flowers
 import time
 import numpy as np
 import sys
@@ -10,7 +9,7 @@ from TeachMyAgent.environments.envs.bodies.BodiesEnum import BodiesEnum
 
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
-debug_folder = "D:\documents\PRO\Etudes\MSc_U-Bordeaux\StageInriaFlowers\TestbedProject\DebugMorphology\MorphologyDebugSequences"
+debug_folder = "XXX\DebugMorphology\MorphologyDebugSequences"
 
 def get_full_debug_sequence(nb_of_motors):
     sequence = []
@@ -60,13 +59,8 @@ def main():
         walkers_to_debug = [sys.argv[1]]
 
     for walker_type in walkers_to_debug:
-        if len(sys.argv) == 3 and sys.argv[2] == "--old_env":
-            env = gym.make('bipedal-walker-continuous-v0')
-            env.env.my_init({'leg_size': 'quadru'})
-            action_space = env.env.action_space
-        else:
-            env = gym.make('parametric-continuous-walker-v0', walker_type=walker_type)
-            action_space = env.action_space
+        env = gym.make('parametric-continuous-walker-v0', walker_type=walker_type)
+        action_space = env.action_space
 
         env.set_environment(stump_height=0, obstacle_spacing=0)
 

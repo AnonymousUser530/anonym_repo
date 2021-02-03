@@ -1,8 +1,6 @@
 import Box2D
 from Box2D.b2 import (edgeShape, circleShape, fixtureDef, polygonShape, revoluteJointDef, contactListener)
-from copy import copy
 from TeachMyAgent.environments.envs.utils.custom_user_data import CustomUserDataObjectTypes
-import numpy as np
 
 class ClimbingDynamics(object):
     def before_step_climbing_dynamics(self, actions, body, world):
