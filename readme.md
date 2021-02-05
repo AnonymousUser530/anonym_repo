@@ -35,13 +35,13 @@ pip install -e .
 ## Launching an experiment
 You can launch an experiment using `run.py`:
 ```
-python run.py --expe_name <name> --env <environment_name> <optional environment parameters> --student <student_name> <optional student parameters> --teacher <teacher_name> <optional teacher parameters>
+python run.py --exp_name <name> --env <environment_name> <optional environment parameters> --student <student_name> <optional student parameters> --teacher <teacher_name> <optional teacher parameters>
 ```
 
 Here is an example of a 10 millions steps training of PPO with the fish embodiment in Parkour using GoalGAN as teacher:
 
 ```
-python run.py --expe_name TestExperiment --env parametric-continuous-parkour-v0 --embodiment fish --student ppo --nb_env_steps 10 --teacher GoalGAN --use_pretrained_samples
+python run.py --exp_name TestExperiment --env parametric-continuous-parkour-v0 --embodiment fish --student ppo --nb_env_steps 10 --teacher GoalGAN --use_pretrained_samples
 ```
 
 ## Visualising results
@@ -76,7 +76,7 @@ import gym
 import TeachMyAgent.environments
 
 env = gym.make('parametric-continuous-parkour-v0', agent_body_type='fish', movable_creepers=True)
-env.set_environment(input_vector=np.zeros(3), water_level = 0.1) # Stump Tracks
+env.set_environment(input_vector=np.zeros(3), water_level = 0.1)
 env.reset()
 
 while True:

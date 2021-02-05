@@ -33,7 +33,8 @@ setup(
         'treelib',
         'gizeh',
         'tqdm',
-        'emcee'
+        'emcee',
+        'notebook'
     ],
     description="TeachMyAgent: A benchmark to study and compare ACL algorithms in continuous procedural environments.",
     author="Anonymous authors",
