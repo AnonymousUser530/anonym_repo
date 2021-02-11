@@ -11,6 +11,8 @@ Our repository provides:
  
  ![global_schema](./TeachMyAgent/graphics/readme_graphics/global_schema.png)
  
+ See our [website](https://sites.google.com/view/teachmyagent/) for additional visualizations.
+ 
  ## Table of Contents  
 **[Installation](#installation)**<br>
 **[Visualising results](#visualising-results)**<br>
